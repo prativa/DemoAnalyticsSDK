@@ -6,9 +6,9 @@ import org.json.JSONObject
 //userId can be a device id, if user has not set any id, if user has set id, then user id will be the userid
 data class DemoEvent(
     val userId: String,
-    val name: String,
+    val eventName: String,
     val timeStamp: Long,
-    val properties: MutableMap<String, Any>?
+    val properties: MutableMap<String, Any>? = mutableMapOf()
 ) {
     fun trackProperty(key: String, value: Any) {
         properties?.set(key, value)
@@ -38,4 +38,5 @@ data class DemoEvent(
         } else
             return null
     }
+
 }
