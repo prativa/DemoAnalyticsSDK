@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.realm)
     implementation(libs.compose.runtime)
+    implementation(libs.androidx.datastore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -16,6 +16,7 @@ compose_runtime ="1.0.0-beta07"
 coroutine ="1.9.0-RC"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
+datastore="1.1.1"
 
 
 [libraries]
@@ -33,7 +34,7 @@ compose-runtime ={group = "androidx.compose.runtime",name ="runtime-android",ver
 coroutine-android = {group ="org.jetbrains.kotlinx",name="kotlinx-coroutines-android",version.ref="coroutine"}
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-
+androidx-datastore ={group ="androidx.datastore",name="datastore-preferences-android",version.ref="datastore"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
