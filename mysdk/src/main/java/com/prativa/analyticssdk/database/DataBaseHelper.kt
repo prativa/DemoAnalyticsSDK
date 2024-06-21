@@ -35,7 +35,12 @@ object DataBaseHelper {
     }
 
     suspend fun hasEventData() : Boolean?{
-        return !realm.query(AnalyticsUser::class).find().isNullOrEmpty()
+        return try {
+            !realm.query(AnalyticsUser::class).find().isNullOrEmpty()
+
+        }catch (ex : NoSuchElementException){
+            false
+        }
 
     }
 

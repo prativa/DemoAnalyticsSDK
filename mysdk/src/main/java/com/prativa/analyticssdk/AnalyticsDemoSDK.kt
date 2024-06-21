@@ -1,7 +1,13 @@
 package com.prativa.analyticssdk
 
 import android.content.Context
+import android.util.Log
+import com.prativa.analyticssdk.database.DataBaseHelper
 import com.prativa.analyticssdk.eventmanager.DemoEvent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 public class AnalyticsDemoSDK(
@@ -10,6 +16,8 @@ public class AnalyticsDemoSDK(
     trackAutomaticEvents: Boolean
 ) {
     private val eventTimings = mutableMapOf<String, Long>()
+    private val job = Job()
+    private val scope = CoroutineScope(Dispatchers.IO + job)
 
     companion object {
         private var INSTANCE: AnalyticsDemoSDK? = null
@@ -37,6 +45,11 @@ public class AnalyticsDemoSDK(
             demoEvent.trackProperty(key, value)
         }
 
+        scope.launch {
+            DataBaseHelper.insertEvent(demoEvent)
+        }
+
+
 
     }
 
@@ -46,9 +59,21 @@ public class AnalyticsDemoSDK(
             eventName = eventName,
             timeStamp = System.currentTimeMillis()
         )
+        scope.launch {
+            DataBaseHelper.insertEvent(demoEvent)
+        }
     }
 
     fun listEvent(){
+        scope.launch {
+            if(DataBaseHelper.hasEventData() == true){
+                DataBaseHelper.getAllEvents().forEach {
+                    Log.i("Demo SDK","Event Name : ${it.eventName} ")
+                }
+
+            }
+
+        }
     }
 
 
