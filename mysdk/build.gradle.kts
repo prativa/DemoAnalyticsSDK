@@ -3,7 +3,8 @@ import com.android.build.gradle.internal.utils.createPublishingInfoForLibrary
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.realm) apply false
+    alias(libs.plugins.realm)
+    alias(libs.plugins.compose.compiler)
 
 
 }
@@ -35,10 +36,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
     buildFeatures {
-        compose = true
     }
+
+
+
 }
 
 dependencies {
@@ -47,11 +49,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.realm)
-    implementation(libs.realm.coroutine)
-    implementation(libs.lifecycle.runtime)
-    implementation(libs.lifecycle.viewmodel)
-    implementation(libs.lifecycle.livedate)
-    implementation(libs.coroutine)
+    implementation(libs.compose.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

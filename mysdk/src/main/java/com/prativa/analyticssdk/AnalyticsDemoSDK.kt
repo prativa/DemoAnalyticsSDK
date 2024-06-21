@@ -2,8 +2,7 @@ package com.prativa.analyticssdk
 
 import android.content.Context
 import com.prativa.analyticssdk.eventmanager.DemoEvent
-import com.prativa.analyticssdk.eventmanager.viewmodel.AnalyticsViewModel
-import kotlinx.coroutines.coroutineScope
+
 
 public class AnalyticsDemoSDK(
     val context: Context,
@@ -12,7 +11,6 @@ public class AnalyticsDemoSDK(
 ) {
     private val eventTimings = mutableMapOf<String, Long>()
 
-    val analyticsViewModel = AnalyticsViewModel()
     companion object {
         private var INSTANCE: AnalyticsDemoSDK? = null
         fun getInstance(
@@ -48,7 +46,6 @@ public class AnalyticsDemoSDK(
             eventName = eventName,
             timeStamp = System.currentTimeMillis()
         )
-        analyticsViewModel.insertEvent(demoEvent)
     }
 
     fun listEvent(){

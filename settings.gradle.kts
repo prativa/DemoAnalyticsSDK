@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AnalyticsApplication"
 include(":app")
-include(":app:mysdk")
+include(":mysdk")
