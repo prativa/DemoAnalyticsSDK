@@ -62,7 +62,12 @@ public class AnalyticsDemoSDK(
         }
 
         scope.launch {
-            DataBaseHelper.insertEvent(demoEvent)
+            val sessionEnabled = DataBaseHelper.hasSession()
+
+            Log.i("Demo SDK", "Session Enabled : $sessionEnabled .eventName $eventName} ")
+            if (sessionEnabled) {
+                DataBaseHelper.insertEvent(demoEvent)
+            }
         }
 
 
