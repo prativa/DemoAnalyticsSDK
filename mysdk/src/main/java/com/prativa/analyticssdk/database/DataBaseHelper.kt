@@ -1,5 +1,6 @@
 package com.prativa.analyticssdk.database
 
+import android.util.Log
 import com.prativa.analyticssdk.database.model.Event
 import com.prativa.analyticssdk.database.model.User
 import com.prativa.analyticssdk.eventmanager.DemoEvent
@@ -8,6 +9,7 @@ import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.migration.AutomaticSchemaMigration
+import io.realm.kotlin.query.RealmQuery
 import io.realm.kotlin.query.RealmSingleQuery
 
 object DataBaseHelper {
@@ -17,7 +19,7 @@ object DataBaseHelper {
                 Event::class,
                 User::class
             )
-        ).schemaVersion(100)
+        ).schemaVersion(101)
             .migration(AutomaticSchemaMigration {})
             .build()
         Realm.open(configuration)
@@ -30,6 +32,7 @@ object DataBaseHelper {
                 timeStamp = event.timeStamp
                 eventName = event.eventName
                 properties = event.getPropertiesInJson()
+
 
             }
             copyToRealm(eventTrack, UpdatePolicy.ALL)
@@ -87,6 +90,20 @@ object DataBaseHelper {
                     }
                 }
             }
+        }
+    }
+
+    suspend fun deleteAllEvents() {
+        realm.write {
+            val queryEvent: RealmQuery<Event> = this.query(Event::class);
+            delete(queryEvent)
+
+        }
+    }
+    suspend fun deleteUser() {
+        realm.write {
+            val queryUser: RealmQuery<User> = this.query(User::class);
+            delete(queryUser)
         }
     }
 

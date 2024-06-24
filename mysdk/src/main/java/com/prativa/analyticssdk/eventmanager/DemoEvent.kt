@@ -1,5 +1,6 @@
 package com.prativa.analyticssdk.eventmanager
 
+import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -12,6 +13,8 @@ data class DemoEvent(
 ) {
     fun trackProperty(key: String, value: Any) {
         properties?.set(key, value)
+        Log.i("Demo SDK Property Check", "Demo Event key : $key value : $value")
+
     }
 
     fun getPropertiesInJson(): String? {

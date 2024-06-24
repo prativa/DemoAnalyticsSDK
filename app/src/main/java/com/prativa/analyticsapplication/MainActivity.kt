@@ -18,9 +18,16 @@ class MainActivity : AppCompatActivity() {
         analytics.startSession()
         analytics.trackEvent("Login");
         analytics.trackEvent("SignUp")
+        val properties = mutableMapOf<String, Any>()
+        properties["device"] = "Android"
+        properties["version"] = "1.0.0"
+        properties["name"] = "Demo User"
+        analytics.trackEventWithProperties("SignUp", properties)
+        analytics.listEvent()
         analytics.stopSession()
         analytics.trackEvent("Logout")
-        analytics.listEvent()
+        analytics.clearEventData()
+
 
 
 

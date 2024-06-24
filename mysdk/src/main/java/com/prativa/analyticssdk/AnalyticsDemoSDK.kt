@@ -58,6 +58,7 @@ public class AnalyticsDemoSDK(
             timeStamp = System.currentTimeMillis()
         )
         properties.forEach { (key, value) ->
+            Log.i("Demo SDK Property Check", "key : $key value : $value")
             demoEvent.trackProperty(key, value)
         }
 
@@ -98,12 +99,25 @@ public class AnalyticsDemoSDK(
 
     }
 
+    fun clearEventData(){
+        scope.launch {
+            DataBaseHelper.deleteAllEvents()
+        }
+    }
+
+    fun clearUserData(){
+        scope.launch {
+            DataBaseHelper.deleteUser()
+        }
+    }
+
     fun listEvent(){
         scope.launch {
 
             if (DataBaseHelper.hasEventData() == true) {
                 DataBaseHelper.getAllEvents().forEach {
-                    Log.i("Demo SDK","Event Name : ${it.eventName} ")
+                    Log.i("Demo SDK","Event Name : ${it.eventName} Property ${it.properties}")
+
                 }
 
             }
