@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.realm)
     alias(libs.plugins.compose.compiler)
-
+    id("maven-publish")
 
 }
 
@@ -54,4 +54,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.prativa"
+                artifactId = "analytics-sdk"
+                version = "1.0"
+            }
+        }
+    }
 }
