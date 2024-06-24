@@ -7,5 +7,5 @@ class User : RealmObject {
     var userId: String = ""
     @PrimaryKey
     var userApiKey: String = ""
-    var sessionEnabled: Boolean = false
+    var trackingEnabled: Boolean = false
 }

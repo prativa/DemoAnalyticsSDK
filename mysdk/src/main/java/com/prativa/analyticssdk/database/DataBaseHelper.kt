@@ -8,7 +8,6 @@ import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.migration.AutomaticSchemaMigration
-import io.realm.kotlin.query.RealmQuery
 import io.realm.kotlin.query.RealmSingleQuery
 
 object DataBaseHelper {
@@ -43,7 +42,7 @@ object DataBaseHelper {
             val analyticsUser = User().apply {
                 userId = user.userId
                 userApiKey = user.userApiKey
-                sessionEnabled = user.isSessionEnabled
+                trackingEnabled = user.isSessionEnabled
             }
             copyToRealm(analyticsUser, UpdatePolicy.ALL)
 
@@ -83,7 +82,7 @@ object DataBaseHelper {
             if (localUser != null) {
                 realm.writeBlocking {
                     findLatest(localUser)?.apply {
-                        sessionEnabled = isSessionEnabled
+                        trackingEnabled = isSessionEnabled
 
                     }
                 }
@@ -96,7 +95,7 @@ object DataBaseHelper {
     }
 
     fun hasSession(): Boolean {
-        return realm.query(User::class).first().find()!!.sessionEnabled
+        return realm.query(User::class).first().find()!!.trackingEnabled
     }
 
 }
